@@ -41,7 +41,7 @@ class MyHomePage extends StatelessWidget {
                   decoration: InputDecoration(labelText: 'Username'),
                 ),
                 TextField(
-                  decoration: InputDecoration(labelText: 'Password'),
+                  decoration: InputDecoration(labelText: 'Password',),keyboardType: TextInputType.,
                 ),
                 RaisedButton( child: Text('Login'), color: Colors.red, textColor: Colors.white, onPressed: (){},),
                 Row(
