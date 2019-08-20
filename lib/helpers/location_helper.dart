@@ -5,7 +5,7 @@ const LatLng _MapCenter = LatLng(17.421098, 78.344263);
 
 class LocationHelper {
 
-  static LatLng mapCenter(){
+  static LatLng getMapCenter(){
     return _MapCenter;
   }
 }

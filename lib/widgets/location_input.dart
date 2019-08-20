@@ -16,19 +16,18 @@ class _LocationInputState extends State<LocationInput> {
   String _previewImageURL;
   LatLng _currentLocation;
   LatLng _orginLocation;
-   Geolocator _geolocator;
+  Geolocator _geolocator;
 
   @override
   void initState() {
     super.initState();
 
     _geolocator = Geolocator();
-    _orginLocation = LocationHelper.mapCenter();
+    _orginLocation = LocationHelper.getMapCenter();
     _getCurrentLocation();
   }
 
   Future<void> _getCurrentLocation() async {
-    
     try {
       final locData = await _geolocator.getCurrentPosition(
           desiredAccuracy: prefix0.LocationAccuracy.best);
@@ -38,35 +37,72 @@ class _LocationInputState extends State<LocationInput> {
         _currentLocation = LatLng(locData.latitude, locData.longitude);
       });
     } catch (e) {
-      print('origin location ${_orginLocation.latitude}, ${_orginLocation.longitude}');
+      print(
+          'origin location ${_orginLocation.latitude}, ${_orginLocation.longitude}');
       _currentLocation = _orginLocation;
     }
   }
 
+  void _onCheckOutPressed() async {
+    try {
+      double distanceInMeters = await _geolocator.distanceBetween(
+          _orginLocation.latitude,
+          _orginLocation.longitude,
+          _currentLocation.latitude,
+          _currentLocation.longitude);
+
+      print("Distance between you and office is $distanceInMeters meters");
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Alert'),
+              content: Text(
+                  "Your are far from office, Please do checkout near 200 meters range"),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
+    } catch (e) {
+      print('Error in calculating Distance:');
+    }
+  }
+
   void _onCheckinPressed() async {
-          print('origin location ${_orginLocation.latitude}, ${_orginLocation.longitude}');
+    print(
+        'origin location ${_orginLocation.latitude}, ${_orginLocation.longitude}');
 
     try {
-      double distanceInMeters = await _geolocator.distanceBetween(_orginLocation.latitude,
-          _orginLocation.longitude, _currentLocation.latitude, _currentLocation.longitude);
-      
-      print("Distance between you and office is $distanceInMeters meters");
-      showDialog(context: context, builder: (BuildContext context){
-         return AlertDialog(
-        title: Text('Alert'),
-        content: Text("Distance between you and office is ${distanceInMeters.toStringAsFixed(2)} meters"),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Ok'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      ); 
-      });
-      
+      double distanceInMeters = await _geolocator.distanceBetween(
+          _orginLocation.latitude,
+          _orginLocation.longitude,
+          _currentLocation.latitude,
+          _currentLocation.longitude);
 
+      print("Distance between you and office is $distanceInMeters meters");
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('CHECK-IN SUCCESS', style: TextStyle(color: Colors.green),),
+              content: Text(
+                  "Distance between you and office is ${distanceInMeters.toStringAsFixed(2)} meters"),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('DONE', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, ),),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
     } catch (e) {
       print('Error in calculating Distance:');
     }
@@ -94,7 +130,7 @@ class _LocationInputState extends State<LocationInput> {
       Marker(
         markerId: MarkerId("marker_1"),
         position: _currentLocation,
-        icon: BitmapDescriptor.defaultMarkerWithHue( BitmapDescriptor.hueAzure),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
       ),
       Marker(
         markerId: MarkerId("marker_2"),
@@ -127,17 +163,19 @@ class _LocationInputState extends State<LocationInput> {
                   ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               FlatButton.icon(
-                icon: Icon(Icons.person_pin_circle),
+                color: Colors.blueAccent,
+                icon: Icon(Icons.touch_app),
                 onPressed: _onCheckinPressed,
-                label: Text('check in'),
+                label: Text('Check-In'),
               ),
               FlatButton.icon(
-                icon: Icon(Icons.person_pin_circle),
-                onPressed: () {},
-                label: Text('check out'),
+                color: Colors.redAccent,
+                icon: Icon(Icons.exit_to_app),
+                onPressed: _onCheckOutPressed,
+                label: Text('Check-Out'),
               ),
             ],
           )
