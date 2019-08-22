@@ -10,7 +10,7 @@ class RaiseTicket extends StatefulWidget {
 
 class _RaiseTicketState extends State<RaiseTicket> {
   bool _isSingleDay = true;
-  var toDateCotroller = TextEditingController();
+  var toDateController = TextEditingController();
   var fromDateController = TextEditingController();
 
   Future<void> _selectToDate(BuildContext context) async {
@@ -22,7 +22,7 @@ class _RaiseTicketState extends State<RaiseTicket> {
     );
     if (picked != null) {
       setState(() {
-        toDateCotroller.text = DateFormat('dd-MM-yyyy').format(picked);
+        toDateController.text = DateFormat('dd-MM-yyyy').format(picked);
       });
     }
   }
@@ -44,7 +44,7 @@ class _RaiseTicketState extends State<RaiseTicket> {
   void _onCheckboxClicked(bool value) {
     setState(() {
       _isSingleDay = value;
-      toDateCotroller.text = null;
+      toDateController.text = null;
     });
   }
 
@@ -75,12 +75,11 @@ class _RaiseTicketState extends State<RaiseTicket> {
                 decoration: InputDecoration(
                   labelText: _isSingleDay ? 'Date' : 'From',
                 ),
-                controller: toDateCotroller,
-                enabled: !_isSingleDay,
+                controller: fromDateController,
               ),
               TextField(
                 decoration: InputDecoration(enabled : false , labelText: 'To'),
-                controller: toDateCotroller,
+                controller: toDateController,
                 enabled: !_isSingleDay,
                 onTap: () {
                     
