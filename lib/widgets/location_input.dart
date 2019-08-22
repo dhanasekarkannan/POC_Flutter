@@ -143,7 +143,7 @@ class _LocationInputState extends State<LocationInput> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Check-In'),
+        title: Text('CHECK-IN'),
       ),
       drawer: MainDrawer(),
       body: Column(
@@ -166,16 +166,16 @@ class _LocationInputState extends State<LocationInput> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               FlatButton.icon(
-                color: Colors.blueAccent,
+                color: Colors.green,
                 icon: Icon(Icons.touch_app),
                 onPressed: _onCheckinPressed,
-                label: Text('Check-In'),
+                label: Text('Check-IN'),
               ),
               FlatButton.icon(
                 color: Colors.redAccent,
                 icon: Icon(Icons.exit_to_app),
                 onPressed: _onCheckOutPressed,
-                label: Text('Check-Out'),
+                label: Text('Check-OUT'),
               ),
             ],
           )

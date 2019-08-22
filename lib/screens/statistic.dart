@@ -11,30 +11,50 @@ class Statistics extends StatelessWidget {
       id: 'Day1',
       date: DateTime.now().subtract( Duration(days: 6)),
       hours: 8.45,
+      timeIn : '09.30 AM',
+      timeOut : '06.45 PM',
     ),new Transaction(
       id: 'Day2',
       date: DateTime.now().subtract(Duration(days: 5)),
       hours: 9.45,
+      timeIn : '09.30 AM',
+      timeOut : '06.45 PM',
+    
     ),new Transaction(
       id: 'Day3',
       date: DateTime.now().subtract(Duration(days: 4)),
       hours: 5.45,
+      timeIn : '09.30 AM',
+      timeOut : '06.45 PM',
+    
     ),new Transaction(
       id: 'Day4',
       date: DateTime.now().subtract(Duration(days: 3)),
       hours: 6.20,
+      timeIn : '09.30 AM',
+      timeOut : '06.45 PM',
+    
     ),new Transaction(
       id: 'Day4',
       date: DateTime.now().subtract(Duration(days: 2)),
       hours: 7.45,
+      timeIn : '09.30 AM',
+      timeOut : '06.45 PM',
+    
     ),new Transaction(
       id: 'Day4',
       date: DateTime.now().subtract(Duration(days: 1)),
       hours: 8.45,
+      timeIn : '09.30 AM',
+      timeOut : '06.45 PM',
+    
     ),new Transaction(
       id: 'Day5',
       date: DateTime.now(),
       hours: 6.45,
+      timeIn : '09.30 AM',
+      timeOut : '06.45 PM',
+    
     )
 
   ];
@@ -43,7 +63,7 @@ class Statistics extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stats'),
+        title: Text('STATS'),
       ),
       drawer: MainDrawer(),
       body: SingleChildScrollView(child: Column(

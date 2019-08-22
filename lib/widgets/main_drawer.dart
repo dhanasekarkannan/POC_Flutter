@@ -19,28 +19,28 @@ class MainDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.location_on),
-            title: Text('Check-In'),
+            title: Text('CHECK-IN'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/locationInput');
             },
           ),
           ListTile(
             leading: Icon(Icons.insert_chart),
-            title: Text('Stats'),
+            title: Text('STATS'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/statistics');
             },
           ),
           ListTile(
             leading: Icon(Icons.mail_outline),
-            title: Text('Raise Ticket'),
+            title: Text('RAISE TICKET'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/raiseTicket');
             },
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
+            title: Text('LOGOUT'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
             },
